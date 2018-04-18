@@ -38,10 +38,11 @@ myMap.addLayer(myLayers.geolandbasemap); // Karte mit Hintergrundlayer verknüpf
 let myMapControl = L.control.layers({
     "OpenStreetMap" : myLayers.osmlayer,
     "BaseMap.at" : myLayers.geolandbasemap,
-    "BaseMap Overlay" : myLayers.bmapoverlay,
     "BaseMap Grau" : myLayers.bmapgrau,
     "BaseMap High DPI" : myLayers.bmaphidpi,
     "BaseMap Orthofoto" : myLayers.bmaporthofoto30cm
+},{
+    "BaseMap Overlay" : myLayers.bmapoverlay,
 });
 myMap.addControl(myMapControl);
 
