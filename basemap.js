@@ -34,4 +34,15 @@ let myLayers = {
 };
 
 myMap.addLayer(myLayers.geolandbasemap); // Karte mit Hintergrundlayer verknüpfen
+
+let myMapControl = L.control.layers({
+    "OpenStreetMap" : myLayers.osmlayer,
+    "BaseMap.at" : myLayers.geolandbasemap,
+    "BaseMap Overlay" : myLayers.bmapoverlay,
+    "BaseMap Grau" : myLayers.bmapgrau,
+    "BaseMap High DPI" : myLayers.bmaphidpi,
+    "BaseMap Orthofoto" : myLayers.bmaporthofoto30cm
+});
+myMap.addControl(myMapControl);
+
 myMap.setView([47.267,11.383],11); //Übergabe Koordinaten (Array, Zentrum) und Zoomfaktor für Karte
