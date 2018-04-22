@@ -1,14 +1,16 @@
-//console.log("Wallo Helt!");
-
-let myMap = L.map("mapdiv"); // L Leaflet Bibliothek, .map erzeugt neue Karte in mein mapdiv
+let myMap = L.map("mapdiv"); // http://leafletjs.com/reference-1.3.0.html#map-example
 
 //Hintergrundkarte mit Openstreet Map
 // {z} Zoom; {x} Länge {y} Breite {s} Subdomains, Kacheln
 let myLayers = {
-    osmlayer: L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"),
+    osmlayer: L.tileLayer(  //http://leafletjs.com/reference-1.3.0.html#tilelayer
+        "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
+            subdomains : ["a","b","c"], //https://wiki.openstreetmap.org/wiki/Domain_names
+            attribution : "Datenquelle: <a href = 'https://www.openstreetmap.org'>openstreetmap.org</a>"
+            }),
     geolandbasemap: L.tileLayer("https://{s}.wien.gv.at/basemap/geolandbasemap/normal/google3857/{z}/{y}/{x}.png",{
-        subdomains : ["maps","maps1","maps2","maps3","maps4"],
-        attribution : "Datenquelle: <a href = 'https://www.basemap.at'>basemap.at</a>"
+        subdomains : ["maps","maps1","maps2","maps3","maps4"], //http://leafletjs.com/reference-1.3.0.html#tilelayer-subdomains
+        attribution : "Datenquelle: <a href = 'https://www.basemap.at'>basemap.at</a>" //http://leafletjs.com/reference-1.3.0.html#layer-attribution
         }
     ),
     bmapoverlay: L.tileLayer("https://{s}.wien.gv.at/basemap/bmapoverlay/normal/google3857/{z}/{y}/{x}.png",{
@@ -33,9 +35,9 @@ let myLayers = {
     ),
 };
 
-myMap.addLayer(myLayers.geolandbasemap); // Karte mit Hintergrundlayer verknüpfen
+myMap.addLayer(myLayers.osmlayer); // http://leafletjs.com/reference-1.3.0.html#map-addlayer Karte mit Hintergrundlayer verknüpfen
 
-let myMapControl = L.control.layers({
+let myMapControl = L.control.layers({   //http://leafletjs.com/reference-1.3.0.html#control-layers-l-control-layers
     "OpenStreetMap" : myLayers.osmlayer,
     "BaseMap.at" : myLayers.geolandbasemap,
     "BaseMap Grau" : myLayers.bmapgrau,
@@ -44,6 +46,6 @@ let myMapControl = L.control.layers({
 },{
     "BaseMap Overlay" : myLayers.bmapoverlay,
 });
-myMap.addControl(myMapControl);
+myMap.addControl(myMapControl); //http://leafletjs.com/reference-1.3.0.html#map-addcontrol
 
-myMap.setView([47.267,11.383],11); //Übergabe Koordinaten (Array, Zentrum) und Zoomfaktor für Karte
+myMap.setView([47.267,11.383],11); //http://leafletjs.com/reference-1.3.0.html#map-setview Übergabe Koordinaten (Array, Zentrum) und Zoomfaktor für Karte
