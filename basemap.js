@@ -54,9 +54,9 @@ myMap.setView([47.267,11.383],11); //http://leafletjs.com/reference-1.3.0.html#m
 
 //http://leafletjs.com/reference-1.3.0.html#control-scale-l-control-scale
 let myMapScale = L.control.scale(
-    {position: "bottomleft"},   // Default bereits bottomleft; https://docs.eegeo.com/eegeo.js/v0.1.304/docs/leaflet/L.Control.Scale/
-    {metric: true},            //http://leafletjs.com/reference-1.3.0.html#control-scale-metric
-    {imperial: false},          // http://leafletjs.com/reference-1.3.0.html#control-scale-imperial
-    {maxWidth: 200}             //http://leafletjs.com/reference-1.3.0.html#control-scale-maxwidth
+    {position: "bottomleft",   // Default bereits bottomleft; https://docs.eegeo.com/eegeo.js/v0.1.304/docs/leaflet/L.Control.Scale/
+    metric: true,            //http://leafletjs.com/reference-1.3.0.html#control-scale-metric
+    imperial: false,          // http://leafletjs.com/reference-1.3.0.html#control-scale-imperial
+    maxWidth: 200}             //http://leafletjs.com/reference-1.3.0.html#control-scale-maxwidth
 ).addTo(myMap);
 //myMap.addControl.scale(myMapScale);
