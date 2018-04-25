@@ -1,4 +1,4 @@
-let myMap = L.map("mapdiv"); // http://leafletjs.com/reference-1.3.0.html#map-example
+let myMap = L.map("mapdiv"); // http://leafletjs.com/reference-1.3.0.html#map-l-map
 
 //Hintergrundkarte mit Openstreet Map
 // {z} Zoom; {x} Länge {y} Breite {s} Subdomains, Kacheln
@@ -54,7 +54,7 @@ myMap.setView([47.267,11.383],11); //http://leafletjs.com/reference-1.3.0.html#m
 
 //http://leafletjs.com/reference-1.3.0.html#control-scale-l-control-scale
 let myMapScale = L.control.scale(
-    {position: "bottomleft",   // Default bereits bottomleft; https://docs.eegeo.com/eegeo.js/v0.1.304/docs/leaflet/L.Control.Scale/
+    {position: "bottomleft",   // Default bereits bottomleft; http://leafletjs.com/reference-1.3.0.html#control-scale-position
     metric: true,            //http://leafletjs.com/reference-1.3.0.html#control-scale-metric
     imperial: false,          // http://leafletjs.com/reference-1.3.0.html#control-scale-imperial
     maxWidth: 200}             //http://leafletjs.com/reference-1.3.0.html#control-scale-maxwidth
