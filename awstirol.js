@@ -56,15 +56,16 @@ const markerOptions = {
     opacity: 0.80                       //http://leafletjs.com/reference-1.3.0.html#marker-opacity
 }
 
-L.marker(Koordinaten.uni, markerOptions).addTo(markerGroup);    //http://leafletjs.com/reference-1.3.0.html#marker
-L.marker(Koordinaten.usi, markerOptions).addTo(markerGroup);
-L.marker(Koordinaten.technik, markerOptions).addTo(markerGroup);
+//L.marker(Koordinaten.uni, markerOptions).addTo(markerGroup);    //http://leafletjs.com/reference-1.3.0.html#marker
+//L.marker(Koordinaten.usi, markerOptions).addTo(markerGroup);
+//L.marker(Koordinaten.technik, markerOptions).addTo(markerGroup);
 
 //PopUps
-let patscherkoflmarker = L.marker(Koordinaten.patscherkofl, markerOptions2).addTo(markerGroup2); 
-L.marker(Koordinaten.igls, markerOptions2).addTo(markerGroup2); 
+//let patscherkoflmarker = L.marker(Koordinaten.patscherkofl, markerOptions2).addTo(markerGroup2); 
+//L.marker(Koordinaten.igls, markerOptions2).addTo(markerGroup2); 
 
-patscherkoflmarker.bindPopup("<p>Patscherkofl:</p><img style='width:200px'src='https://apps.tirol.gv.at/luft/nordkette.jpg' alt='Patscherkofl' />");
+//patscherkoflmarker.bindPopup("<p>Patscherkofl:</p><img style='width:200px'src='https://apps.tirol.gv.at/luft/nordkette.jpg' alt='Patscherkofl' />");
 
 //Start Zoom
-myMap.fitBounds(markerAWS.getBounds()); 
+//myMap.fitBounds(markerAWS.getBounds()); 
+myMap.setView([47.267,11.383],11);
