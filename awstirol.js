@@ -75,9 +75,6 @@ const KoordinatenAWS = {
 
 let awsdata = [
 
-    Hafelekar = {"name":"Hafelekar","temperatur":"1.6","datum":"2018-04-26T08:10:00+02:00","link":"https://lawine.tirol.gv.at/data/grafiken/540/standard/dreitage/seegrube.png"},
-    Hohe_Munde_Gipfel = {"name":"Hohe Munde Gipfel","temperatur":"","datum":"2018-04-26T08:00:00+02:00","link":"https://lawine.tirol.gv.at/data/grafiken/540/standard/woche/hohemunde.png"},
-    Hohe_Munde_WS = {"name":"Hohe Munde Windstation","temperatur":"-4.1","datum":"2018-04-26T08:00:00+02:00","link":"https://lawine.tirol.gv.at/data/grafiken/540/standard/dreitage/rauthhuette.png"},
     Nassereith_Wannig = {"name":"Nassereith Wannig","temperatur":"-1.2","datum":"2018-04-26T08:00:00+02:00","link":"https://lawine.tirol.gv.at/data/grafiken/540/standard/dreitage/nassereith.png"},
     Nassereith_Alm = {"name":"Nassereither Alm","temperatur":"4","datum":"2018-04-26T08:00:00+02:00","link":"https://lawine.tirol.gv.at/data/grafiken/540/standard/dreitage/nassereith.png"},
     Puitegg = {"name":"Puitegg","temperatur":"5.3","datum":"2018-04-26T08:00:00+02:00","link":"https://lawine.tirol.gv.at/data/grafiken/540/standard/dreitage/puitegg.png"},
@@ -109,48 +106,50 @@ let awsdata = [
 
 //Marker definieren, erstellen, Gruppieren und Einbinden
 const markerOptionsAWS = {
-    //title: "Universität Innsbruck",
+    title: "Automatische Wetterstationen Tirol",
     //draggable: true,
     opacity: 0.95
 }
 
 let GehrenspitzeMarker = L.marker(KoordinatenAWS.Gehrenspitze, markerOptionsAWS).addTo(markerAWS);
-L.marker(KoordinatenAWS.Hafelekar, markerOptionsAWS).addTo(markerAWS);
-L.marker(KoordinatenAWS.Hohe_Munde_Gipfel, markerOptionsAWS).addTo(markerAWS);
-L.marker(KoordinatenAWS.Hohe_Munde_WS, markerOptionsAWS).addTo(markerAWS);
-L.marker(KoordinatenAWS.Nassereith_Wannig, markerOptionsAWS).addTo(markerAWS);
-L.marker(KoordinatenAWS.Nassereith_Alm, markerOptionsAWS).addTo(markerAWS);
-L.marker(KoordinatenAWS.Puitegg, markerOptionsAWS).addTo(markerAWS);
-L.marker(KoordinatenAWS.Rauthhütte, markerOptionsAWS).addTo(markerAWS);
-L.marker(KoordinatenAWS.Rosshütte_WS, markerOptionsAWS).addTo(markerAWS);
-L.marker(KoordinatenAWS.Seegrube, markerOptionsAWS).addTo(markerAWS);
-L.marker(KoordinatenAWS.Dalfazkamm, markerOptionsAWS).addTo(markerAWS);
-L.marker(KoordinatenAWS.Erfurterhütte, markerOptionsAWS).addTo(markerAWS);
-L.marker(KoordinatenAWS.Agetwoad, markerOptionsAWS).addTo(markerAWS);
-L.marker(KoordinatenAWS.Breiter_GK_SS, markerOptionsAWS).addTo(markerAWS);
-L.marker(KoordinatenAWS.Breiter_GK_WS, markerOptionsAWS).addTo(markerAWS);
-L.marker(KoordinatenAWS.FS_Hütte_HS, markerOptionsAWS).addTo(markerAWS);
-L.marker(KoordinatenAWS.FS_Hütte_KH, markerOptionsAWS).addTo(markerAWS);
-L.marker(KoordinatenAWS.Lampsenspitze_SS, markerOptionsAWS).addTo(markerAWS);
-L.marker(KoordinatenAWS.Lampsenspitze_WS, markerOptionsAWS).addTo(markerAWS);
-L.marker(KoordinatenAWS.Roter_Schrofen, markerOptionsAWS).addTo(markerAWS);
-L.marker(KoordinatenAWS.Schlicker_Alm, markerOptionsAWS).addTo(markerAWS);
-L.marker(KoordinatenAWS.Seirlöcher_Kogel, markerOptionsAWS).addTo(markerAWS);
-L.marker(KoordinatenAWS.Lämmerbichlalm, markerOptionsAWS).addTo(markerAWS);
-L.marker(KoordinatenAWS.Rastkogel_WS, markerOptionsAWS).addTo(markerAWS);
-L.marker(KoordinatenAWS.Sonntagsköpfl, markerOptionsAWS).addTo(markerAWS);
-L.marker(KoordinatenAWS.Sonntagsköpfl_WS, markerOptionsAWS).addTo(markerAWS);
-L.marker(KoordinatenAWS.Tuxerjoch_SS, markerOptionsAWS).addTo(markerAWS);
-L.marker(KoordinatenAWS.Tuxerjoch_WS, markerOptionsAWS).addTo(markerAWS);
-L.marker(KoordinatenAWS.Wandspitze_SS, markerOptionsAWS).addTo(markerAWS);
-L.marker(KoordinatenAWS.Wandspitze_WS, markerOptionsAWS).addTo(markerAWS);
+let HafelekarMarker = L.marker(KoordinatenAWS.Hafelekar, markerOptionsAWS).addTo(markerAWS);
+let Hohe_Munde_GipfelMarker = L.marker(KoordinatenAWS.Hohe_Munde_Gipfel, markerOptionsAWS).addTo(markerAWS);
+let Hohe_Munde_WSMarker = L.marker(KoordinatenAWS.Hohe_Munde_WS, markerOptionsAWS).addTo(markerAWS);
+let Nassereith_WannigMarker = L.marker(KoordinatenAWS.Nassereith_Wannig, markerOptionsAWS).addTo(markerAWS);
+let Nassereith_AlmMarker = L.marker(KoordinatenAWS.Nassereith_Alm, markerOptionsAWS).addTo(markerAWS);
+let PuiteggMarker = L.marker(KoordinatenAWS.Puitegg, markerOptionsAWS).addTo(markerAWS);
+let RauthhütteMarker = L.marker(KoordinatenAWS.Rauthhütte, markerOptionsAWS).addTo(markerAWS);
+let Rosshütte_WSMarker = L.marker(KoordinatenAWS.Rosshütte_WS, markerOptionsAWS).addTo(markerAWS);
+let SeegrubeMarker = L.marker(KoordinatenAWS.Seegrube, markerOptionsAWS).addTo(markerAWS);
+let DalfazkammMarker = L.marker(KoordinatenAWS.Dalfazkamm, markerOptionsAWS).addTo(markerAWS);
+let ErfurterhütteMarker = L.marker(KoordinatenAWS.Erfurterhütte, markerOptionsAWS).addTo(markerAWS);
+let AgetwoadMarker = L.marker(KoordinatenAWS.Agetwoad, markerOptionsAWS).addTo(markerAWS);
+let Breiter_GK_SSMarker = L.marker(KoordinatenAWS.Breiter_GK_SS, markerOptionsAWS).addTo(markerAWS);
+let Breiter_GK_WSMarker = L.marker(KoordinatenAWS.Breiter_GK_WS, markerOptionsAWS).addTo(markerAWS);
+let FS_Hütte_HSMarker = L.marker(KoordinatenAWS.FS_Hütte_HS, markerOptionsAWS).addTo(markerAWS);
+let FS_Hütte_KHMarker = L.marker(KoordinatenAWS.FS_Hütte_KH, markerOptionsAWS).addTo(markerAWS);
+let Lampsenspitze_SSMarker = L.marker(KoordinatenAWS.Lampsenspitze_SS, markerOptionsAWS).addTo(markerAWS);
+let Lampsenspitze_WSMarker = L.marker(KoordinatenAWS.Lampsenspitze_WS, markerOptionsAWS).addTo(markerAWS);
+let Roter_SchrofenMarker = L.marker(KoordinatenAWS.Roter_Schrofen, markerOptionsAWS).addTo(markerAWS);
+let Schlicker_AlmMarker = L.marker(KoordinatenAWS.Schlicker_Alm, markerOptionsAWS).addTo(markerAWS);
+let Seirlöcher_KogelMarker = L.marker(KoordinatenAWS.Seirlöcher_Kogel, markerOptionsAWS).addTo(markerAWS);
+let LämmerbichlalmMarker = L.marker(KoordinatenAWS.Lämmerbichlalm, markerOptionsAWS).addTo(markerAWS);
+let Rastkogel_WSMarker = L.marker(KoordinatenAWS.Rastkogel_WS, markerOptionsAWS).addTo(markerAWS);
+let SonntagsköpflMarker = L.marker(KoordinatenAWS.Sonntagsköpfl, markerOptionsAWS).addTo(markerAWS);
+let Sonntagsköpfl_WSMarker = L.marker(KoordinatenAWS.Sonntagsköpfl_WS, markerOptionsAWS).addTo(markerAWS);
+let Tuxerjoch_SSMarker = L.marker(KoordinatenAWS.Tuxerjoch_SS, markerOptionsAWS).addTo(markerAWS);
+let Tuxerjoch_WSMarker = L.marker(KoordinatenAWS.Tuxerjoch_WS, markerOptionsAWS).addTo(markerAWS);
+let Wandspitze_SSMarker = L.marker(KoordinatenAWS.Wandspitze_SS, markerOptionsAWS).addTo(markerAWS);
+let Wandspitze_WSMarker = L.marker(KoordinatenAWS.Wandspitze_WS, markerOptionsAWS).addTo(markerAWS);
 
 //Marker Gruppe zur Karte hinzu
 myMap.addLayer(markerAWS);  
 
 //PopUps
-//patscherkoflmarker.bindPopup("<p>Patscherkofl:</p><img style='width:200px'src='https://apps.tirol.gv.at/luft/nordkette.jpg' alt='Patscherkofl' />");
-GehrenspitzeMarker.bindPopup("<p>Station: Gehrenspitze </br> Temperatur: 0.6 </br> Datum: 2018-04-26</p><img style='width:200px' src='https://lawine.tirol.gv.at/data/grafiken/540/standard/dreitage/puitegg.png' alt='Gehrenspitze' />");
+GehrenspitzeMarker.bindPopup("<p>Station: Gehrenspitze </br> Temperatur: 0.6 </br> Datum: 2018-04-26</p><img style='width:300px' src='https://lawine.tirol.gv.at/data/grafiken/540/standard/dreitage/puitegg.png' alt='Gehrenspitze' />");
+HafelekarMarker.bindPopup("<p>Station: Hafelekar </br> Temperatur: 1.6 </br> Datum: 2018-04-26</p><img style='width:300px' src='https://lawine.tirol.gv.at/data/grafiken/540/standard/dreitage/seegrube.png' alt='Hafelekar' />");
+Hohe_Munde_GipfelMarker.bindPopup("<p>Station: Hohe Munde Gipfel </br> Temperatur: </br> Datum: 2018-04-26</p><img style='width:300px' src='https://lawine.tirol.gv.at/data/grafiken/540/standard/woche/hohemunde.png' alt='Hohe_Munde_Gipfel' />");
+Hohe_Munde_WSMarker.bindPopup("<p>Station: Hohe Munde Windstation </br> Temperatur: -4.1 </br> Datum: 2018-04-26</p><img style='width:300px' src='https://lawine.tirol.gv.at/data/grafiken/540/standard/dreitage/rauthhuette.png' alt='Hohe_Munde_Windstation' />");
 
 
 //Start Ansicht - Zoom
