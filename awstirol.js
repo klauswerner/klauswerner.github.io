@@ -114,6 +114,23 @@ const markerOptionsAWS = {
     opacity: 0.95
 }
 
+for (i = 0; i < awsdata.length; i++){
+const station = awsdata[i];
+
+L.marker([station.lat,station.lng], markerOptionsAWS).addTo(markerAWS).bindPopup(`<p>Station: ${station.name} </br> Temparatur: ${station.temperatur} °C </br> Datum ${station.datum} </br> <img src=${station.link}></img> </p>`);
+
+}
+
+//Marker Gruppe zur Karte hinzu
+myMap.addLayer(markerAWS);  
+
+
+//Start Ansicht - Zoom
+myMap.fitBounds(markerAWS.getBounds()); 
+
+
+
+/* Alte Version lang
 let GehrenspitzeMarker = L.marker(KoordinatenAWS.Gehrenspitze, markerOptionsAWS).addTo(markerAWS);
 let HafelekarMarker = L.marker(KoordinatenAWS.Hafelekar, markerOptionsAWS).addTo(markerAWS);
 let Hohe_Munde_GipfelMarker = L.marker(KoordinatenAWS.Hohe_Munde_Gipfel, markerOptionsAWS).addTo(markerAWS);
@@ -145,11 +162,10 @@ let Tuxerjoch_SSMarker = L.marker(KoordinatenAWS.Tuxerjoch_SS, markerOptionsAWS)
 let Tuxerjoch_WSMarker = L.marker(KoordinatenAWS.Tuxerjoch_WS, markerOptionsAWS).addTo(markerAWS);
 let Wandspitze_SSMarker = L.marker(KoordinatenAWS.Wandspitze_SS, markerOptionsAWS).addTo(markerAWS);
 let Wandspitze_WSMarker = L.marker(KoordinatenAWS.Wandspitze_WS, markerOptionsAWS).addTo(markerAWS);
-
-//Marker Gruppe zur Karte hinzu
-myMap.addLayer(markerAWS);  
+*/
 
 //PopUps
+/*
 GehrenspitzeMarker.bindPopup("<p>Station: Gehrenspitze </br> Temperatur: 0.6 </br> Datum: 2018-04-26</p><img style='width:300px' src='https://lawine.tirol.gv.at/data/grafiken/540/standard/dreitage/puitegg.png' alt='Gehrenspitze' />");
 HafelekarMarker.bindPopup("<p>Station: Hafelekar </br> Temperatur: 1.6 </br> Datum: 2018-04-26</p><img style='width:300px' src='https://lawine.tirol.gv.at/data/grafiken/540/standard/dreitage/seegrube.png' alt='Hafelekar' />");
 Hohe_Munde_GipfelMarker.bindPopup("<p>Station: Hohe Munde Gipfel </br> Temperatur: </br> Datum: 2018-04-26</p><img style='width:300px' src='https://lawine.tirol.gv.at/data/grafiken/540/standard/woche/hohemunde.png' alt='Hohe_Munde_Gipfel' />");
@@ -181,7 +197,4 @@ Tuxerjoch_SSMarker.bindPopup("<p>Station: Tuxerjoch Schneestation </br> Temperat
 Tuxerjoch_WSMarker.bindPopup("<p>Station: Tuxerjoch Windstation </br> Temperatur: 1.5 </br> Datum: 2018-04-26</p><img style='width:300px' src='https://lawine.tirol.gv.at/data/grafiken/540/standard/dreitage/tuxerjoch.png' alt='Tuxerjoch Windstation' />");
 Wandspitze_SSMarker.bindPopup("<p>Station: Wandspitze Schneestation </br> Temperatur: 1.3 </br> Datum: 2018-04-26</p><img style='width:300px' src='https://lawine.tirol.gv.at/data/grafiken/540/standard/dreitage/wandspitze.png' alt='Wandspitze Schneestation' />");
 Wandspitze_WSMarker.bindPopup("<p>Station: Wandspitze Windstation </br> Temperatur: -0.3 </br> Datum: 2018-04-26</p><img style='width:300px' src='https://lawine.tirol.gv.at/data/grafiken/540/standard/dreitage/wandspitze.png' alt='Wandspitze Windstation' />");
-
-//Start Ansicht - Zoom
-myMap.fitBounds(markerAWS.getBounds()); 
-//myMap.setView([47.267,11.383],11);
+*/
