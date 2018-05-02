@@ -3,6 +3,8 @@ let myMap = L.map("mapdiv"); // http://leafletjs.com/reference-1.3.0.html#map-l-
 // für fitBounds
 const wienGroup = L.featureGroup();
 
+const url = "https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&srsName=EPSG:4326&outputFormat=json&typeName=ogdwien:SPAZIERPUNKTOGD,ogdwien:SPAZIERLINIEOGD"
+
 //Hintergrundkarte mit Openstreet Map
 // {z} Zoom; {x} Länge {y} Breite {s} Subdomains, Kacheln
 let myLayers = {
