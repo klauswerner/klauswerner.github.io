@@ -54,7 +54,7 @@ let myMapControl = L.control.layers({   //http://leafletjs.com/reference-1.3.0.h
 });
 myMap.addControl(myMapControl); //http://leafletjs.com/reference-1.3.0.html#map-addcontrol
 
-myMap.setView([47.267,11.383],11); //http://leafletjs.com/reference-1.3.0.html#map-setview Übergabe Koordinaten (Array, Zentrum) und Zoomfaktor für Karte
+//myMap.setView([47.267,11.383],11); //http://leafletjs.com/reference-1.3.0.html#map-setview Übergabe Koordinaten (Array, Zentrum) und Zoomfaktor für Karte
 
 //http://leafletjs.com/reference-1.3.0.html#control-scale-l-control-scale
 let myMapScale = L.control.scale(
@@ -63,7 +63,8 @@ let myMapScale = L.control.scale(
     imperial: false,          // http://leafletjs.com/reference-1.3.0.html#control-scale-imperial
     maxWidth: 200}             //http://leafletjs.com/reference-1.3.0.html#control-scale-maxwidth
 ).addTo(myMap);
-//myMap.addControl.scale(myMapScale);
+
+myMap.addLayer(wienGroup);
 
 //Daten vom Server über URL holen und Laden
 async function addGeoJson(url){
@@ -72,7 +73,18 @@ async function addGeoJson(url){
    // console.log("Response: ",response);
     const wiendata = await response.json();
    // console.log("GeoJSON: ", wiendata);
-    const geojson = L.geoJSON(wiendata);
+    const geojson = L.geoJSON(wiendata,{
+style: function(feature){
+    return {color: "#ff0000"}; 
+},
+    pointToLayer: function(geoJsonPoint, latlng){
+    return L.marker(latlng, {
+        icon: L.icon({
+            iconUrl: "images/star-3.png"
+        })
+    });
+ }
+});
     wienGroup.addLayer(geojson);
     geojson.bindPopup(function(layer){
         const props = layer.feature.properties;
@@ -83,6 +95,7 @@ async function addGeoJson(url){
     });
     myMap.fitBounds(wienGroup.getBounds()); 
 }
+
 
 const url = "https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&srsName=EPSG:4326&outputFormat=json&typeName=ogdwien:SPAZIERPUNKTOGD,ogdwien:SPAZIERLINIEOGD"
 
