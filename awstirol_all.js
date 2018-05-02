@@ -62,3 +62,5 @@ let myMapScale = L.control.scale(
 //myMap.addControl.scale(myMapScale);
 
 console.log("Stationen: ", stationen);
+
+L.geoJSON(stationen).addTo(myMap);
