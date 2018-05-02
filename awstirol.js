@@ -38,41 +38,7 @@ let myMapScale = L.control.scale(
     maxWidth: 200}
 ).addTo(myMap);
 
-//Koordinaten
-const KoordinatenAWS = {
-    Gehrenspitze : [47.387131, 11.133717],
-    Hafelekar : [47.312079,11.383623],
-    Hohe_Munde_Gipfel : [47.346295,11.080385],
-    Hohe_Munde_WS :[47.346612,11.083694],
-    Nassereith_Wannig :[47.336922,10.862333],
-    Nassereith_Alm :[47.344376,10.849554],
-    Puitegg : [47.394844,11.152817],
-    Rauthhuette : [47.345909, 11.104943],
-    Rosshuette_WS : [47.342025,11.227903],
-    Seegrube : [47.3063819943737,11.3779335010812],
-    Dalfazkamm : [47.448514,11.751511],
-    Erfurterhuette : [47.441861,11.762127],
-    Agetwoad : [47.069889,10.862306],
-    Breiter_GK_SS : [47.0839527777778,11.0273833333333],
-    Breiter_GK_WS : [47.1010555555556,11.0230388888889],
-    Falkaunsalpe : [47.071488,10.76282],
-    FS_Huette_HS : [47.099611,11.15541667],
-    FS_Huette_KH : [47.0960000187559,11.1623888694066],
-    Lampsenspitze_SS : [47.153491,11.120722],
-    Lampsenspitze_WS : [47.156075,11.095642],
-    Roter_Schrofen : [47.04,10.7181],
-    Schlicker_Alm : [47.154432,11.303207],
-    Seirloecher_Kogel : [47.0339,10.8528],
-    Laemmerbichlalm : [47.181266,11.751717],
-    Rastkogel_WS : [47.192132,11.767481],
-    Sonntagskoepfl : [47.2750109996958,11.7520860028295],
-    Sonntagskoepfl_WS : [47.271989,11.755802],
-    Tuxerjoch_SS : [47.093149,11.648053],
-    Tuxerjoch_WS : [47.089717,11.648987],
-    Wandspitze_SS : [47.121858,11.661969],
-    Wandspitze_WS : [47.120752,11.658062],
-};
-
+// Daten aus .js kopiert
 let awsdata = [
     {"lat":"47.387131","lng":"11.133717","name":"Gehrenspitze","temperatur":"0.6","datum":"2018-04-26T08:00:00+02:00","link":"https://lawine.tirol.gv.at/data/grafiken/540/standard/dreitage/puitegg.png"},
     {"lat":"47.312079","lng":"11.383623","name":"Hafelekar","temperatur":"1.6","datum":"2018-04-26T08:10:00+02:00","link":"https://lawine.tirol.gv.at/data/grafiken/540/standard/dreitage/seegrube.png"},
@@ -114,6 +80,7 @@ const markerOptionsAWS = {
     opacity: 0.95
 }
 
+//Kurze Version mit for Schleife
 for (i = 0; i < awsdata.length; i++){
 const station = awsdata[i];
 
@@ -123,12 +90,45 @@ L.marker([station.lat,station.lng], markerOptionsAWS).addTo(markerAWS).bindPopup
 
 //Marker Gruppe zur Karte hinzu
 myMap.addLayer(markerAWS);  
-
-
 //Start Ansicht - Zoom
 myMap.fitBounds(markerAWS.getBounds()); 
 
-
+/*
+//Koordinaten
+const KoordinatenAWS = {
+    Gehrenspitze : [47.387131, 11.133717],
+    Hafelekar : [47.312079,11.383623],
+    Hohe_Munde_Gipfel : [47.346295,11.080385],
+    Hohe_Munde_WS :[47.346612,11.083694],
+    Nassereith_Wannig :[47.336922,10.862333],
+    Nassereith_Alm :[47.344376,10.849554],
+    Puitegg : [47.394844,11.152817],
+    Rauthhuette : [47.345909, 11.104943],
+    Rosshuette_WS : [47.342025,11.227903],
+    Seegrube : [47.3063819943737,11.3779335010812],
+    Dalfazkamm : [47.448514,11.751511],
+    Erfurterhuette : [47.441861,11.762127],
+    Agetwoad : [47.069889,10.862306],
+    Breiter_GK_SS : [47.0839527777778,11.0273833333333],
+    Breiter_GK_WS : [47.1010555555556,11.0230388888889],
+    Falkaunsalpe : [47.071488,10.76282],
+    FS_Huette_HS : [47.099611,11.15541667],
+    FS_Huette_KH : [47.0960000187559,11.1623888694066],
+    Lampsenspitze_SS : [47.153491,11.120722],
+    Lampsenspitze_WS : [47.156075,11.095642],
+    Roter_Schrofen : [47.04,10.7181],
+    Schlicker_Alm : [47.154432,11.303207],
+    Seirloecher_Kogel : [47.0339,10.8528],
+    Laemmerbichlalm : [47.181266,11.751717],
+    Rastkogel_WS : [47.192132,11.767481],
+    Sonntagskoepfl : [47.2750109996958,11.7520860028295],
+    Sonntagskoepfl_WS : [47.271989,11.755802],
+    Tuxerjoch_SS : [47.093149,11.648053],
+    Tuxerjoch_WS : [47.089717,11.648987],
+    Wandspitze_SS : [47.121858,11.661969],
+    Wandspitze_WS : [47.120752,11.658062],
+};
+*/
 
 /* Alte Version lang
 let GehrenspitzeMarker = L.marker(KoordinatenAWS.Gehrenspitze, markerOptionsAWS).addTo(markerAWS);

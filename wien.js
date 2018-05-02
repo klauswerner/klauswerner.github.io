@@ -3,8 +3,6 @@ let myMap = L.map("mapdiv"); // http://leafletjs.com/reference-1.3.0.html#map-l-
 // für fitBounds
 const wienGroup = L.featureGroup();
 
-const url = "https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&srsName=EPSG:4326&outputFormat=json&typeName=ogdwien:SPAZIERPUNKTOGD,ogdwien:SPAZIERLINIEOGD"
-
 //Hintergrundkarte mit Openstreet Map
 // {z} Zoom; {x} Länge {y} Breite {s} Subdomains, Kacheln
 let myLayers = {
@@ -43,16 +41,16 @@ let myLayers = {
 myMap.addLayer(myLayers.geolandbasemap); // http://leafletjs.com/reference-1.3.0.html#map-addlayer Karte mit Hintergrundlayer verknüpfen
 
 let myMapControl = L.control.layers({   //http://leafletjs.com/reference-1.3.0.html#control-layers-l-control-layers
-    "OpenStreetMap" : myLayers.osmlayer,
+    //"OpenStreetMap" : myLayers.osmlayer,
     "BaseMap.at" : myLayers.geolandbasemap,
-    "BaseMap Grau" : myLayers.bmapgrau,
-    "BaseMap High DPI" : myLayers.bmaphidpi,
+    //"BaseMap Grau" : myLayers.bmapgrau,
+    //"BaseMap High DPI" : myLayers.bmaphidpi,
     "BaseMap Orthofoto" : myLayers.bmaporthofoto30cm
 },{
-    "BaseMap Overlay" : myLayers.bmapoverlay,
+    //"BaseMap Overlay" : myLayers.bmapoverlay,
     "Stadtspaziergang" : wienGroup
 },{
-    collapsed: false             //http://leafletjs.com/reference-1.3.0.html#control-layers-collapsed
+    collapsed: true             //http://leafletjs.com/reference-1.3.0.html#control-layers-collapsed
 });
 myMap.addControl(myMapControl); //http://leafletjs.com/reference-1.3.0.html#map-addcontrol
 
@@ -67,7 +65,31 @@ let myMapScale = L.control.scale(
 ).addTo(myMap);
 //myMap.addControl.scale(myMapScale);
 
+//Daten vom Server über URL holen und Laden
+async function addGeoJson(url){
+   // console.log("URL wird geladen: ...", url);
+    const response = await fetch(url);
+   // console.log("Response: ",response);
+    const wiendata = await response.json();
+   // console.log("GeoJSON: ", wiendata);
+    const geojson = L.geoJSON(wiendata);
+    wienGroup.addLayer(geojson);
+    geojson.bindPopup(function(layer){
+        const props = layer.feature.properties;
+        const popupText = `<h1>${props.NAME}</h1>
+        <p>Kategorie: ${props.KATEGORIE} </br> Bemerkung: ${props.BEMERKUNG}</p>`;
+        return popupText;
+    
+    });
+    myMap.fitBounds(wienGroup.getBounds()); 
+}
 
+const url = "https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&srsName=EPSG:4326&outputFormat=json&typeName=ogdwien:SPAZIERPUNKTOGD,ogdwien:SPAZIERLINIEOGD"
+
+addGeoJson(url);
+
+/*
+// lokales geojson wird eingebunden
 //Default aktiviert
 myMap.addLayer(wienGroup);
 
@@ -79,5 +101,5 @@ geojson.bindPopup(function(layer){
     return popupText;
 
 });
-
-myMap.fitBounds(wienGroup.getBounds()); 
+*/
+//myMap.fitBounds(wienGroup.getBounds()); 
