@@ -60,3 +60,5 @@ let myMapScale = L.control.scale(
     maxWidth: 200}             //http://leafletjs.com/reference-1.3.0.html#control-scale-maxwidth
 ).addTo(myMap);
 //myMap.addControl.scale(myMapScale);
+
+console.log("Stationen: ", stationen);
