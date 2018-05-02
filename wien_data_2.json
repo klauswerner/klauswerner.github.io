@@ -1,4 +1,4 @@
-const wiendata = {
+{
     "type": "FeatureCollection",
     "totalFeatures": 133,
     "features": [
