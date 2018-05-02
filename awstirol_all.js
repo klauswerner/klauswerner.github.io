@@ -1,5 +1,8 @@
 let myMap = L.map("mapdiv"); // http://leafletjs.com/reference-1.3.0.html#map-l-map
 
+// für fitBounds
+const awsGroup = L.featureGroup();
+
 //Hintergrundkarte mit Openstreet Map
 // {z} Zoom; {x} Länge {y} Breite {s} Subdomains, Kacheln
 let myLayers = {
@@ -45,6 +48,7 @@ let myMapControl = L.control.layers({   //http://leafletjs.com/reference-1.3.0.h
     "BaseMap Orthofoto" : myLayers.bmaporthofoto30cm
 },{
     "BaseMap Overlay" : myLayers.bmapoverlay,
+    "Wetterstationen" : awsGroup
 },{
     collapsed: false             //http://leafletjs.com/reference-1.3.0.html#control-layers-collapsed
 });
@@ -61,6 +65,21 @@ let myMapScale = L.control.scale(
 ).addTo(myMap);
 //myMap.addControl.scale(myMapScale);
 
-console.log("Stationen: ", stationen);
+//Ausgabe Test console.log("Stationen: ", stationen);
 
-L.geoJSON(stationen).addTo(myMap);
+//Default aktiviert
+myMap.addLayer(awsGroup);
+
+let = geojson = L.geoJSON(stationen).addTo(awsGroup);
+geojson.bindPopup(function(layer){
+    const props = layer.feature.properties;
+    const popupText = `<h1>${props.name}</h1>
+    <p>Temperatur: ${props.LT} °C</p>`;
+    //const popupText2 = "<h1>"+layer.feature.properties.name+"</h1>"; // alternative Schreibweise
+    return popupText;
+    //console.log("Layer for Popup: ", layer);
+});
+
+
+myMap.fitBounds(awsGroup.getBounds()); 
+
