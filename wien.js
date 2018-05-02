@@ -76,7 +76,6 @@ geojson.bindPopup(function(layer){
     <p>Kategorie: ${props.KATEGORIE} </br> Bemerkung: ${props.BEMERKUNG}</p>`;
     return popupText;
 
-    console.log("Layer for Popup: ", layer);
 });
 
 myMap.fitBounds(wienGroup.getBounds()); 
