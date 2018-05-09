@@ -80,7 +80,7 @@ style: function(feature){
     pointToLayer: function(geoJsonPoint, latlng){
     return L.marker(latlng, {
         icon: L.icon({
-            iconUrl: "images/star-3.png"
+            iconUrl: "images/walkingtour.png"
         })
     });
  }
