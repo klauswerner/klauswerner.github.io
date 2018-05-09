@@ -2,6 +2,7 @@ let myMap = L.map("mapdiv");
 
 // für fitBounds
 const wienGroup_cb = L.featureGroup();
+const clmarkers = L.markerClusterGroup();
 
 //Hintergrundkarten
 let myLayers = {
@@ -44,7 +45,9 @@ let myMapControl = L.control.layers({
     "BaseMap.at" : myLayers.geolandbasemap,
     "BaseMap Orthofoto" : myLayers.bmaporthofoto30cm
 },{
-    "CityBikes" : wienGroup_cb
+    "CityBikes" : wienGroup_cb,
+    "CityBikes Cluster" : clmarkers
+
 },{ 
     collapsed: true
 });
@@ -90,7 +93,7 @@ style: function(feature){
 
     const hash = new L.Hash(myMap);
 
-    const clmarkers = L.markerClusterGroup();
+
     clmarkers.addLayer(wienGroup_cb);
     myMap.addLayer(clmarkers);
 }
