@@ -82,7 +82,8 @@ style: function(feature){
     pointToLayer: function(geoJsonPoint, latlng){
     return L.marker(latlng, {
         icon: L.icon({
-            iconUrl: "images/cycling.png"
+            iconUrl: "images/cycling.png",
+            iconAnchor: [16,37]
         })
     });
  }
