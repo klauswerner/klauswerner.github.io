@@ -57,7 +57,7 @@ let myMapScale = L.control.scale(
     maxWidth: 200}
 ).addTo(myMap);
 
-myMap.addLayer(wienGroup_cb);
+//myMap.addLayer(wienGroup_cb);
 
 //Daten vom Server über URL holen und Laden
 async function addGeoJson(url){
@@ -89,6 +89,10 @@ style: function(feature){
     myMap.fitBounds(wienGroup_cb.getBounds()); 
 
     const hash = new L.Hash(myMap);
+
+    const clmarkers = L.markerClusterGroup();
+    clmarkers.addLayer(wienGroup_cb);
+    myMap.addLayer(clmarkers);
 }
 
 const url = "https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:CITYBIKEOGD&srsName=EPSG:4326&outputFormat=json"
@@ -97,3 +101,4 @@ const url = "https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&ve
 addGeoJson(url);
 
 //Leaflet Hash Plugin
+//Leaflet Marker Cluster Plugin
