@@ -82,7 +82,7 @@ style: function(feature){
     geojson.bindPopup(function(layer){
         const props = layer.feature.properties;
         const popupText = `<h1>${props.NAME}</h1>
-        <p>Adresse: ${props.ADRESSE} </br> Weitere Informationen: ${props.WEITERE_INF}</p>`;
+        <p>Adresse: ${props.ADRESSE} </br> Weitere Informationen: <a href="${props.WEITERE_INF}">${props.WEITERE_INF}</a></p>`;
         return popupText;
     
     });
