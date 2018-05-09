@@ -75,8 +75,8 @@ async function ladeGeojsonLayer(url) {
     karte.fitBounds(geojsonGruppe.getBounds());
 }
 
-// den GeoJSON Layer für Grillplätze laden
-ladeGeojsonLayer(wienDatensaetze[2].json);
+// den GeoJSON Layer für Grillplätze laden - Default
+ladeGeojsonLayer(wienDatensaetze[0].json);
 //console.log(wienDatensaetze);
 
 
@@ -87,6 +87,12 @@ let layerAuswahl = document.getElementById("layerAuswahl");
 
 for(datensatz of wienDatensaetze){
     layerAuswahl.innerHTML += `<option value="${datensatz.json}">${datensatz.titel}</option>` // += hier wichtig, fügt bei jedem Durchlauf neue option hinzu
-console.log(datensatz.titel);
+//console.log(datensatz.titel);
     }
 
+//Events einbauen
+layerAuswahl.onchange = function(evt){
+    geojsonGruppe.clearLayers();
+    ladeGeojsonLayer(evt.target.value);
+    //console.log(evt.target.value);
+}
