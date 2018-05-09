@@ -86,7 +86,7 @@ wienDatensaetze.sort(
             return 0;
         }
     }
-)
+);
 
 // den GeoJSON Layer für Grillplätze laden - Default
 ladeGeojsonLayer(wienDatensaetze[0].json);
