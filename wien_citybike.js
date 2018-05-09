@@ -94,18 +94,4 @@ const url = "https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&ve
 //Aufruf der Funktion
 addGeoJson(url);
 
-/*
-// lokales geojson wird eingebunden
-//Default aktiviert
-myMap.addLayer(wienGroup);
-
-let = geojson = L.geoJSON(wiendata).addTo(wienGroup);
-geojson.bindPopup(function(layer){
-    const props = layer.feature.properties;
-    const popupText = `<h1>${props.NAME}</h1>
-    <p>Kategorie: ${props.KATEGORIE} </br> Bemerkung: ${props.BEMERKUNG}</p>`;
-    return popupText;
-
-});
-*/
-//myMap.fitBounds(wienGroup.getBounds()); 
+//Leaflet Hash Plugin
