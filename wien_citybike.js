@@ -1,19 +1,18 @@
-let myMap = L.map("mapdiv"); // http://leafletjs.com/reference-1.3.0.html#map-l-map
+let myMap = L.map("mapdiv");
 
 // für fitBounds
-const wienGroup = L.featureGroup();
+const wienGroup_cb = L.featureGroup();
 
-//Hintergrundkarte mit Openstreet Map
-// {z} Zoom; {x} Länge {y} Breite {s} Subdomains, Kacheln
+//Hintergrundkarten
 let myLayers = {
-    osmlayer: L.tileLayer(  //http://leafletjs.com/reference-1.3.0.html#tilelayer
+    osmlayer: L.tileLayer(
         "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
-            subdomains : ["a","b","c"], //https://wiki.openstreetmap.org/wiki/Domain_names
+            subdomains : ["a","b","c"],
             attribution : "Datenquelle: <a href = 'https://www.openstreetmap.org'>openstreetmap.org</a>"
             }),
     geolandbasemap: L.tileLayer("https://{s}.wien.gv.at/basemap/geolandbasemap/normal/google3857/{z}/{y}/{x}.png",{
-        subdomains : ["maps","maps1","maps2","maps3","maps4"], //http://leafletjs.com/reference-1.3.0.html#tilelayer-subdomains
-        attribution : "Datenquelle: <a href = 'https://www.basemap.at'>basemap.at</a>" //http://leafletjs.com/reference-1.3.0.html#layer-attribution
+        subdomains : ["maps","maps1","maps2","maps3","maps4"],
+        attribution : "Datenquelle: <a href = 'https://www.basemap.at'>basemap.at</a>"
         }
     ),
     bmapoverlay: L.tileLayer("https://{s}.wien.gv.at/basemap/bmapoverlay/normal/google3857/{z}/{y}/{x}.png",{
@@ -38,41 +37,35 @@ let myLayers = {
     ),
 };
 
-myMap.addLayer(myLayers.geolandbasemap); // http://leafletjs.com/reference-1.3.0.html#map-addlayer Karte mit Hintergrundlayer verknüpfen
+myMap.addLayer(myLayers.geolandbasemap); 
 
-let myMapControl = L.control.layers({   //http://leafletjs.com/reference-1.3.0.html#control-layers-l-control-layers
-    //"OpenStreetMap" : myLayers.osmlayer,
+let myMapControl = L.control.layers({
+
     "BaseMap.at" : myLayers.geolandbasemap,
-    //"BaseMap Grau" : myLayers.bmapgrau,
-    //"BaseMap High DPI" : myLayers.bmaphidpi,
     "BaseMap Orthofoto" : myLayers.bmaporthofoto30cm
 },{
-    //"BaseMap Overlay" : myLayers.bmapoverlay,
-    "Stadtspaziergang" : wienGroup
-},{
-    collapsed: true             //http://leafletjs.com/reference-1.3.0.html#control-layers-collapsed
+    "CityBikes" : wienGroup_cb
+},{ 
+    collapsed: true
 });
-myMap.addControl(myMapControl); //http://leafletjs.com/reference-1.3.0.html#map-addcontrol
+myMap.addControl(myMapControl);
 
-//myMap.setView([47.267,11.383],11); //http://leafletjs.com/reference-1.3.0.html#map-setview Übergabe Koordinaten (Array, Zentrum) und Zoomfaktor für Karte
-
-//http://leafletjs.com/reference-1.3.0.html#control-scale-l-control-scale
 let myMapScale = L.control.scale(
-    {position: "bottomleft",   // Default bereits bottomleft; http://leafletjs.com/reference-1.3.0.html#control-scale-position
-    metric: true,            //http://leafletjs.com/reference-1.3.0.html#control-scale-metric
-    imperial: false,          // http://leafletjs.com/reference-1.3.0.html#control-scale-imperial
-    maxWidth: 200}             //http://leafletjs.com/reference-1.3.0.html#control-scale-maxwidth
+    {position: "bottomleft",
+    metric: true,
+    imperial: false,
+    maxWidth: 200}
 ).addTo(myMap);
 
-myMap.addLayer(wienGroup);
+myMap.addLayer(wienGroup_cb);
 
 //Daten vom Server über URL holen und Laden
 async function addGeoJson(url){
-   // console.log("URL wird geladen: ...", url);
+    //console.log("URL wird geladen: ...", url);
     const response = await fetch(url);
-   // console.log("Response: ",response);
+    //console.log("Response: ",response);
     const wiendata = await response.json();
-   // console.log("GeoJSON: ", wiendata);
+    //console.log("GeoJSON: ", wiendata);
     const geojson = L.geoJSON(wiendata,{
 style: function(feature){
     return {color: "#ff0000"}; 
@@ -85,19 +78,19 @@ style: function(feature){
     });
  }
 });
-    wienGroup.addLayer(geojson);
+    wienGroup_cb.addLayer(geojson);
     geojson.bindPopup(function(layer){
         const props = layer.feature.properties;
-        const popupText = `<h1>${props.NAME}</h1>
-        <p>Kategorie: ${props.KATEGORIE} </br> Bemerkung: ${props.BEMERKUNG}</p>`;
+        const popupText = `<h1>${props.STATION}</h1>
+        <p>Bezirk: ${props.BEZIRK} </br> CityBike Nummer: ${props.SE_SDO_ROWID}</p>`;
         return popupText;
     
     });
-    myMap.fitBounds(wienGroup.getBounds()); 
+    myMap.fitBounds(wienGroup_cb.getBounds()); 
 }
 
 
-const url = "https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&srsName=EPSG:4326&outputFormat=json&typeName=ogdwien:SPAZIERPUNKTOGD,ogdwien:SPAZIERLINIEOGD"
+const url = "https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:CITYBIKEOGD&srsName=EPSG:4326&outputFormat=json"
 
 addGeoJson(url);
 
