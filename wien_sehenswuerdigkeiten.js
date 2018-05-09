@@ -57,15 +57,15 @@ let myMapScale = L.control.scale(
     maxWidth: 200}
 ).addTo(myMap);
 
-myMap.addLayer(wienGroup);
+myMap.addLayer(wienGroup_sw);
 
 //Daten vom Server über URL holen und Laden
 async function addGeoJson(url){
-   // console.log("URL wird geladen: ...", url);
+    //console.log("URL wird geladen: ...", url);
     const response = await fetch(url);
-   // console.log("Response: ",response);
+    //console.log("Response: ",response);
     const wiendata = await response.json();
-   // console.log("GeoJSON: ", wiendata);
+    //console.log("GeoJSON: ", wiendata);
     const geojson = L.geoJSON(wiendata,{
 style: function(feature){
     return {color: "#ff0000"}; 
@@ -78,19 +78,19 @@ style: function(feature){
     });
  }
 });
-    wienGroup.addLayer(geojson);
+    wienGroup_sw.addLayer(geojson);
     geojson.bindPopup(function(layer){
         const props = layer.feature.properties;
         const popupText = `<h1>${props.NAME}</h1>
-        <p>Kategorie: ${props.KATEGORIE} </br> Bemerkung: ${props.BEMERKUNG}</p>`;
+        <p>Adresse: ${props.ADRESSE} </br> Weitere Informationen: ${props.WEITERE_INF}</p>`;
         return popupText;
     
     });
-    myMap.fitBounds(wienGroup.getBounds()); 
+    myMap.fitBounds(wienGroup_sw.getBounds()); 
 }
 
 
-const url = "https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:CITYBIKEOGD&srsName=EPSG:4326&outputFormat=json"
+const url = "https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:SEHENSWUERDIGOGD&srsName=EPSG:4326&outputFormat=json"
 
 addGeoJson(url);
 
