@@ -90,16 +90,18 @@ async function addGeoJson(url) {
             });
         }
     });
+
     //Einzelne Punkte aus der GEOJson zur MarkerGroup hinzufügen
     wienGroup_cb.addLayer(geojson);
+
     //Popups erstellen
     geojson.bindPopup(function (layer) {
         const props = layer.feature.properties;
         const popupText = `<h1>${props.STATION}</h1>
         <p>Bezirk: ${props.BEZIRK} </br> CityBike Nummer: ${props.SE_SDO_ROWID}</p>`;
         return popupText;
-
     });
+
     //Default Zoom Ansicht auf MarkerGroup
     myMap.fitBounds(wienGroup_cb.getBounds());
 
@@ -114,12 +116,10 @@ async function addGeoJson(url) {
     myMap.addControl(new L.Control.Search({
         layer: wienGroup_cb,
         propertyName: "STATION"
-    })
+        })
     );
 
 }
 
 //Aufruf der Funktion
 addGeoJson(url);
-
-//Leaflet search
