@@ -93,6 +93,26 @@ let myMapScale = L.control.scale(
     }
 ).addTo(myMap);
 
+const SZ_Koordinaten = {
+    start : [47.431846, 12.214388],
+    ziel : [47.39918, 11.943173],
+};
+
+const markerOptionStart = {
+    title: "Westendorf",
+    draggable: false,
+    opacity: 0.90
+};
+
+const markerOptionZiel = {
+    title: "Innsbrucker Umland",
+    draggable: false,
+    opacity: 0.90
+};
+
+L.marker(SZ_Koordinaten.start, markerOptionStart).bindPopup("<p>Start: Westendorf</p><img style='width:200px'src='' alt='' />").addTo(biketour);
+L.marker(SZ_Koordinaten.ziel, markerOptionZiel).bindPopup("<p>Ziel: Alpbach</p><img style='width:200px'src='' alt='' />").addTo(biketour);
+
 // lokales geojson wird eingebunden
 
 let = geojson = L.geoJSON(biketourdata).addTo(biketour);
