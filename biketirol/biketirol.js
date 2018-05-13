@@ -98,30 +98,42 @@ const SZ_Koordinaten = {
     ziel : [47.39918, 11.943173],
 };
 
+const myIconStart = L.icon({
+    iconUrl: 'images/cycling.png',
+    iconAnchor: [16, 37]
+});
+
+const myIconZiel = L.icon({
+    iconUrl: 'images/finish2.png',
+    iconAnchor: [16, 37]
+});
+
 const markerOptionStart = {
     title: "Westendorf",
     draggable: false,
-    opacity: 0.90
+    opacity: 0.90,
+    icon: myIconStart
 };
 
 const markerOptionZiel = {
     title: "Innsbrucker Umland",
     draggable: false,
-    opacity: 0.90
+    opacity: 0.90,
+    icon: myIconZiel
 };
 
-L.marker(SZ_Koordinaten.start, markerOptionStart).bindPopup("<p>Start: Westendorf</p><img style='width:200px'src='' alt='' />").addTo(biketour);
-L.marker(SZ_Koordinaten.ziel, markerOptionZiel).bindPopup("<p>Ziel: Alpbach</p><img style='width:200px'src='' alt='' />").addTo(biketour);
+L.marker(SZ_Koordinaten.start, markerOptionStart).bindPopup("<p>Start: Westendorf</p><a href='https://de.wikipedia.org/wiki/Westendorf_(Tirol)'>Westendorf</a>").addTo(biketour);
+L.marker(SZ_Koordinaten.ziel, markerOptionZiel).bindPopup("<p>Ziel: Alpbach</p><a href='https://de.wikipedia.org/wiki/Alpbach'>Alpach</a>").addTo(biketour);
 
 // lokales geojson wird eingebunden
 
-let = geojson = L.geoJSON(biketourdata).addTo(biketour);
+const geojson = L.geoJSON(biketourdata).addTo(biketour);
+
 geojson.bindPopup(function(layer){
     const props = layer.feature.properties;
     const popupText = `<h2>${props.name}</h2>
     <p>Westendorf - Alpbach</p>`;
     return popupText;
-
 });
 
 myMap.fitBounds(biketour.getBounds()); 
