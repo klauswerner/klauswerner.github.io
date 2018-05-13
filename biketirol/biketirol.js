@@ -93,21 +93,15 @@ let myMapScale = L.control.scale(
     }
 ).addTo(myMap);
 
-myMap.setView([47.4457314,11.9750545],11);
-
-
-/*
 // lokales geojson wird eingebunden
-//Default aktiviert
-myMap.addLayer(wienGroup);
 
-let = geojson = L.geoJSON(wiendata).addTo(wienGroup);
+let = geojson = L.geoJSON(biketourdata).addTo(biketour);
 geojson.bindPopup(function(layer){
     const props = layer.feature.properties;
-    const popupText = `<h1>${props.NAME}</h1>
-    <p>Kategorie: ${props.KATEGORIE} </br> Bemerkung: ${props.BEMERKUNG}</p>`;
+    const popupText = `<h2>${props.name}</h2>
+    <p>Westendorf - Alpbach</p>`;
     return popupText;
 
 });
-*/
-//myMap.fitBounds(wienGroup.getBounds()); 
+
+myMap.fitBounds(biketour.getBounds()); 
