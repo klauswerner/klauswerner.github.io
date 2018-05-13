@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Bike Trail Tirol - Etappe Westendorf - Alpbach</title><!-- TODO: Etappentitel einfügen, check -->
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../js/leaflet/leaflet.css" />
+    <script src="../js/leaflet/leaflet.js"></script>
+
+    <link rel="stylesheet" href="styles.css" />
+    <script defer src="biketirol.js"></script>
+    <script  src="data/etappe14.geojson.js"></script>
+
+</head>
+
+<body>
+    <div id="header">
+        <h2 class="white">Bike Trail Tirol</h2>
+        <h3 class="white">Griass enk die Wadeln!</h3>
+    </div>
+
+    <div class="author">
+        <img src="images/user.jpg" alt="Ihr Reiseleiter" /><!-- TODO: anpassen, check -->
+        <p class="gray">
+            <a href="mailto:werner.klaus@student.uibk.ac.at">Werner Klaus</a> -<!-- TODO: anpassen, check -->
+            <a href="https://klauswerner.github.io/biketirol/index.html">https://webmapping.github.io/biketirol/</a><!-- TODO: anpassen, check -->
+        </p>
+    </div>
+
+    <hr />
+
+    
+    <div class="article">
+        <h1>Etappe 14 von Westendorf nach Alpbach</h1><!-- TODO: anpassen, check -->
+
+        <p>Von Westendorf führt die Strecke zunächst auf der Talstraße in das Windautal, 
+            einem ruhigen Seitental des Brixental. Ab Hopfgarten steigt die Strecke stetig an, 
+            nach dem Ort Thierbach geht es in Serpentinen bis auf eine Seehöhe von 1.680 Metern. 
+            Am „Oberen Höhenweg“ führt die Strecke dann nach Alpbach dem „Schönste Dorf Österreichs“. </p>
+
+        TODO: Karte mit Radroute und Marker beim Start- und Endpunkt. Hintergrundkarte OSM, basemap.at und Elektronische Karte Tirol (Sommer, Winter, Orthophoto jeweils mit Beschriftung) - siehe biketirol.js
+        <div id="map" style="width:900px;height:600px;"></div>
+
+        <h2>Streckenbeschreibung</h2>
+        <p>TODO: ausführliche Streckenbeschreibung aus Online Beschreibung https://www.tirol.at/reisefuehrer/sport/radfahren/biketouren?form=biketours&theme[]=1</p>
+
+        <h3>Links</h3>
+        <ul>
+            <li>https://www.tirol.at/reisefuehrer/sport/radfahren/biketouren?form=biketours&theme[]=1</li>
+            <li>TODO: mindestens drei weitere Links zur Umgebung ...</li>
+        </ul>
+    </div>
+
+    <hr />
+
+    <!-- TODO: Links anpassen zu den benachbarten Etappen - siehe OLAT Tabelle ... -->
+    <div id="footer" class="gray">
+        <a class="back" href="../12/index.html">
+            <i class="fas fa-arrow-alt-circle-left"></i> vorhergehender Stop</a>
+        <a class="next" href="../15/index.html">nächster Stop
+            <i class="fas fa-arrow-alt-circle-right"></i>
+        </a>
+    </div>
+
+</body>
+</html>
