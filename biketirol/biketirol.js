@@ -43,22 +43,19 @@ let myLayers = {
         subdomains: ["maps", "maps1", "maps2", "maps3", "maps4"],
         attribution: "Datenquelle: <a href = 'https://www.basemap.at'>basemap.at</a>"
     }
-    ),
-    gdi_base_summer: L.tileLayer("http://wmts.kartetirol.at/wmts/gdi_base_summer/GoogleMapsCompatible/11/2/84.jpeg80", {
-        //subdomains: ["maps", "maps1", "maps2", "maps3", "maps4"],
+    ), //tilematrix=zoom tilecol=x and tilerow=y 9/273/179 10/548/358 11/1093/716
+    gdi_summer: L.tileLayer("http://wmts.kartetirol.at/wmts/gdi_summer/GoogleMapsCompatible/10/546/358.jpeg80", {
         attribution: "Datenquelle: <a href = 'https://www.tirol.gv.at/statistik-budget/tiris/tiris-geodatendienste/impressum-elektronische-karte-tirol/'>Elektronische Karte Tirol</a>"
     }
     ),
-    gdi_base_winter: L.tileLayer("http://wmts.kartetirol.at/wmts/gdi_base_winter/{TileMatrixSet}/{TileMatrix}/{TileCol}/{TileRow}.jpeg80", {
-        //subdomains: ["maps", "maps1", "maps2", "maps3", "maps4"],
+    gdi_winter: L.tileLayer("http://wmts.kartetirol.at/wmts/gdi_winter/GoogleMapsCompatible/10/546/358.jpeg80", {
         attribution: "Datenquelle: <a href = 'https://www.tirol.gv.at/statistik-budget/tiris/tiris-geodatendienste/impressum-elektronische-karte-tirol/'>Elektronische Karte Tirol</a>"
     }
     ),
-    gdi_ortho: L.tileLayer("http://wmts.kartetirol.at/wmts/gdi_ortho/{TileMatrixSet}/{TileMatrix}/{TileCol}/{TileRow}.jpeg80", {
-        //subdomains: ["maps", "maps1", "maps2", "maps3", "maps4"],
+    gdi_ortho: L.tileLayer("http://wmts.kartetirol.at/wmts/gdi_ortho/GoogleMapsCompatible/10/546/358.jpeg80", {
         attribution: "Datenquelle: <a href = 'https://www.tirol.gv.at/statistik-budget/tiris/tiris-geodatendienste/impressum-elektronische-karte-tirol/'>Elektronische Karte Tirol</a>"
     }
-    ),
+    )
 };
 
 //Default Hintergrundkarte
@@ -71,8 +68,8 @@ myMap.addLayer(biketour);
 let myMapControl = L.control.layers({
     "OSM BaseMap": myLayers.osmlayer,
     "BaseMap.at": myLayers.geolandbasemap,
-    "Elektronische Karte Tirol Sommer": myLayers.gdi_base_summer,
-    "Elektronische Karte Tirol Winter": myLayers.gdi_base_winter,
+    "Elektronische Karte Tirol Sommer": myLayers.gdi_summer,
+    "Elektronische Karte Tirol Winter": myLayers.gdi_winter,
     "Elektronische Karte Tirol Orthofoto": myLayers.gdi_ortho
 }, {
         "Biketour Etappe 14": biketour,
