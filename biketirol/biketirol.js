@@ -44,16 +44,22 @@ let myLayers = {
         attribution: "Datenquelle: <a href = 'https://www.basemap.at'>basemap.at</a>"
     }
     ), //tilematrix=zoom tilecol=x and tilerow=y 9/273/179 10/548/358 11/1093/716
-    gdi_summer: L.tileLayer("http://wmts.kartetirol.at/wmts/gdi_summer/GoogleMapsCompatible/10/546/358.jpeg80", {
-        attribution: "Datenquelle: <a href = 'https://www.tirol.gv.at/statistik-budget/tiris/tiris-geodatendienste/impressum-elektronische-karte-tirol/'>Elektronische Karte Tirol</a>"
+    gdi_summer: L.tileLayer("http://wmts.kartetirol.at/wmts/gdi_summer/GoogleMapsCompatible/{z}/{x}/{y}.jpeg80", {
+    minZoom: 0,
+    maxZoom: 18,    
+    attribution: "Datenquelle: <a href = 'https://www.tirol.gv.at/statistik-budget/tiris/tiris-geodatendienste/impressum-elektronische-karte-tirol/'>Elektronische Karte Tirol</a>"
     }
     ),
-    gdi_winter: L.tileLayer("http://wmts.kartetirol.at/wmts/gdi_winter/GoogleMapsCompatible/10/546/358.jpeg80", {
-        attribution: "Datenquelle: <a href = 'https://www.tirol.gv.at/statistik-budget/tiris/tiris-geodatendienste/impressum-elektronische-karte-tirol/'>Elektronische Karte Tirol</a>"
+    gdi_winter: L.tileLayer("http://wmts.kartetirol.at/wmts/gdi_winter/GoogleMapsCompatible/{z}/{x}/{y}.jpeg80", {
+    minZoom: 0,
+    maxZoom: 18,     
+    attribution: "Datenquelle: <a href = 'https://www.tirol.gv.at/statistik-budget/tiris/tiris-geodatendienste/impressum-elektronische-karte-tirol/'>Elektronische Karte Tirol</a>"
     }
     ),
-    gdi_ortho: L.tileLayer("http://wmts.kartetirol.at/wmts/gdi_ortho/GoogleMapsCompatible/10/546/358.jpeg80", {
-        attribution: "Datenquelle: <a href = 'https://www.tirol.gv.at/statistik-budget/tiris/tiris-geodatendienste/impressum-elektronische-karte-tirol/'>Elektronische Karte Tirol</a>"
+    gdi_ortho: L.tileLayer("http://wmts.kartetirol.at/wmts/gdi_ortho/GoogleMapsCompatible/{z}/{x}/{y}.jpeg80", {
+    minZoom: 0,
+    maxZoom: 18,     
+    attribution: "Datenquelle: <a href = 'https://www.tirol.gv.at/statistik-budget/tiris/tiris-geodatendienste/impressum-elektronische-karte-tirol/'>Elektronische Karte Tirol</a>"
     }
     )
 };
@@ -122,7 +128,7 @@ const markerOptionZiel = {
 L.marker(SZ_Koordinaten.start, markerOptionStart).bindPopup("<p>Start: Westendorf</p><a href='https://de.wikipedia.org/wiki/Westendorf_(Tirol)'>Westendorf</a>").addTo(biketour);
 L.marker(SZ_Koordinaten.ziel, markerOptionZiel).bindPopup("<p>Ziel: Alpbach</p><a href='https://de.wikipedia.org/wiki/Alpbach'>Alpach</a>").addTo(biketour);
 
-// lokales geojson wird eingebunden
+// lokales geojson wird eingebunden 
 
 const geojson = L.geoJSON(biketourdata).addTo(biketour);
 
