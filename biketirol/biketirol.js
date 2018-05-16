@@ -150,12 +150,14 @@ myMap.addControl(new L.Control.Fullscreen());
 let gpxTrack = new L.GPX("data/etappe14.gpx", {async: true}).addTo(myMap);
 gpxTrack.on("loaded",function(evt){
 
-    console.log(evt.target.get_distance());
-    console.log(evt.target.get_elevation_min());
-    console.log(evt.target.get_elevation_max());
-    console.log(evt.target.get_elevation_min());
-    console.log(evt.target.get_elevation_max());
-
+    /*console.log(evt.target.get_distance().toFixed(0));
+    console.log(evt.target.get_elevation_min().toFixed(0));
+    console.log(evt.target.get_elevation_max().toFixed(0));
+    console.log(evt.target.get_elevation_min().toFixed(0));
+    console.log(evt.target.get_elevation_max().toFixed(0));*/
+    let laenge = evt.target.get_distance().toFixed(0);
+    document.getElementById("laenge").innerHTML = laenge;
     myMap.fitBounds(evt.target.getBounds());
+
 });
 
