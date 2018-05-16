@@ -77,7 +77,9 @@ async function addGeoJson(url) {
     //console.log("Response: ",response);
     const wiendata = await response.json();
     //console.log("GeoJSON: ", wiendata);
-    const geojson = L.geoJSON(wiendata, {
+
+
+    const geojson = L.geoJSON(wiendata,{
         style: function (feature) {
             return { color: "#ff0000" };
         },  //Icons definieren
@@ -89,7 +91,11 @@ async function addGeoJson(url) {
                 })
             });
         }
-    });
+    }
+    );
+
+/*
+    */
 
     //Einzelne Punkte aus der GEOJson zur MarkerGroup hinzufügen
     wienGroup_cb.addLayer(geojson);
