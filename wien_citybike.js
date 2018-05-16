@@ -125,7 +125,10 @@ async function addGeoJson(url) {
         })
     );
 
-}
+};
+
+//Plugin Fullscreen
+myMap.addControl(new L.Control.Fullscreen());
 
 //Aufruf der Funktion
 addGeoJson(url);

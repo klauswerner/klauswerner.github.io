@@ -140,3 +140,6 @@ geojson.bindPopup(function(layer){
 });
 
 myMap.fitBounds(biketour.getBounds()); 
+
+//Plugin Fullscreen
+myMap.addControl(new L.Control.Fullscreen());
