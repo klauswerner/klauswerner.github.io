@@ -30,7 +30,8 @@
 let myMap = L.map("map");
 
 // für fitBounds
-const biketour = L.featureGroup();
+const biketourTrack = L.featureGroup().addTo(myMap);
+const biketourMarker = L.featureGroup().addTo(myMap);
 
 //Hintergrundkarten
 let myLayers = {
@@ -68,7 +69,7 @@ let myLayers = {
 myMap.addLayer(myLayers.geolandbasemap);
 
 //Default Overlaykarte
-myMap.addLayer(biketour);
+//myMap.addLayer(biketourTrack);
 
 //Kartenansichten schalten und zu Karte hinzufügen(aktivieren)
 let myMapControl = L.control.layers({
@@ -78,7 +79,8 @@ let myMapControl = L.control.layers({
     "Elektronische Karte Tirol Winter": myLayers.gdi_winter,
     "Elektronische Karte Tirol Orthofoto": myLayers.gdi_ortho
 }, {
-        "Biketour Etappe 14": biketour,
+        "biketourTrack Etappe 14": biketourTrack,
+        "Start - Ziel": biketourMarker,
     }, {
         collapsed: true
     }).addTo(myMap);
@@ -125,21 +127,35 @@ const markerOptionZiel = {
     icon: myIconZiel
 };
 
-L.marker(SZ_Koordinaten.start, markerOptionStart).bindPopup("<p>Start: Westendorf</p><a href='https://de.wikipedia.org/wiki/Westendorf_(Tirol)'>Westendorf</a>").addTo(biketour);
-L.marker(SZ_Koordinaten.ziel, markerOptionZiel).bindPopup("<p>Ziel: Alpbach</p><a href='https://de.wikipedia.org/wiki/Alpbach'>Alpach</a>").addTo(biketour);
+L.marker(SZ_Koordinaten.start, markerOptionStart).bindPopup("<p>Start: Westendorf</p><a href='https://de.wikipedia.org/wiki/Westendorf_(Tirol)'>Westendorf</a>").addTo(biketourMarker);
+L.marker(SZ_Koordinaten.ziel, markerOptionZiel).bindPopup("<p>Ziel: Alpbach</p><a href='https://de.wikipedia.org/wiki/Alpbach'>Alpach</a>").addTo(biketourMarker);
 
 // lokales geojson wird eingebunden 
 
-const geojson = L.geoJSON(biketourdata).addTo(biketour);
-
+//const geojson = L.geoJSON(biketourTrackdata).addTo(biketourTrack);
+/*
 geojson.bindPopup(function(layer){
     const props = layer.feature.properties;
     const popupText = `<h2>${props.name}</h2>
     <p>Westendorf - Alpbach</p>`;
     return popupText;
-});
+});*/
 
-myMap.fitBounds(biketour.getBounds()); 
+//myMap.fitBounds(biketourTrack.getBounds()); 
 
 //Plugin Fullscreen
 myMap.addControl(new L.Control.Fullscreen());
+
+//Plugin GPX
+let gpxTrack = new L.GPX("data/etappe14.gpx", {async: true}).addTo(myMap);
+gpxTrack.on("loaded",function(evt){
+
+    console.log(evt.target.get_distance());
+    console.log(evt.target.get_elevation_min());
+    console.log(evt.target.get_elevation_max());
+    console.log(evt.target.get_elevation_min());
+    console.log(evt.target.get_elevation_max());
+
+    myMap.fitBounds(evt.target.getBounds());
+});
+
