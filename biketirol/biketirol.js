@@ -27,6 +27,8 @@
 
 // Overlay controls zum unabhängigem Ein-/Ausschalten der Route und Marker hinzufügen
 
+//<reference path = "typings/index.d.ts">
+
 let myMap = L.map("map");
 
 // für fitBounds
@@ -62,8 +64,28 @@ let myLayers = {
     maxZoom: 18,     
     attribution: "Datenquelle: <a href = 'https://www.tirol.gv.at/statistik-budget/tiris/tiris-geodatendienste/impressum-elektronische-karte-tirol/'>Elektronische Karte Tirol</a>"
     }
+    ),
+    gdi_nomenklatur: L.tileLayer("http://wmts.kartetirol.at/wmts/gdi_nomenklatur/GoogleMapsCompatible/{z}/{x}/{y}.jpeg80", {
+    minZoom: 0,
+    maxZoom: 18,     
+    attribution: "Datenquelle: <a href = 'https://www.tirol.gv.at/statistik-budget/tiris/tiris-geodatendienste/impressum-elektronische-karte-tirol/'>Elektronische Karte Tirol</a>"
+    }
     )
 };
+
+const tirisSommerkarte = L.layerGroup([
+    myLayers.gdi_summer,
+    myLayers.gdi_nomenklatur,
+]);
+const tirisWinterkarte = L.layerGroup([
+    myLayers.gdi_winter,
+    myLayers.gdi_nomenklatur,
+]);
+const tirisOrthofoto = L.layerGroup([
+    myLayers.gdi_ortho,
+    myLayers.gdi_nomenklatur,
+]);
+
 
 //Default Hintergrundkarte
 myMap.addLayer(myLayers.geolandbasemap);
@@ -75,9 +97,9 @@ myMap.addLayer(myLayers.geolandbasemap);
 let myMapControl = L.control.layers({
     "OSM BaseMap": myLayers.osmlayer,
     "BaseMap.at": myLayers.geolandbasemap,
-    "Elektronische Karte Tirol Sommer": myLayers.gdi_summer,
-    "Elektronische Karte Tirol Winter": myLayers.gdi_winter,
-    "Elektronische Karte Tirol Orthofoto": myLayers.gdi_ortho
+    "Elektronische Karte Tirol Sommer": tirisSommerkarte,
+    "Elektronische Karte Tirol Winter": tirisWinterkarte,
+    "Elektronische Karte Tirol Orthofoto": tirisOrthofoto,
 }, {
         "biketourTrack Etappe 14": biketourTrack,
         "Start - Ziel": biketourMarker,
@@ -156,7 +178,17 @@ gpxTrack.on("loaded",function(evt){
     console.log(evt.target.get_elevation_min().toFixed(0));
     console.log(evt.target.get_elevation_max().toFixed(0));*/
     let laenge = evt.target.get_distance().toFixed(0);
+    let tPkt = evt.target.get_elevation_min().toFixed(0);
+    let hPkt = evt.target.get_elevation_max().toFixed(0);
+    let aufs = evt.target.get_elevation_gain().toFixed(0);
+    let abs = evt.target.get_elevation_loss().toFixed(0);
+
     document.getElementById("laenge").innerHTML = laenge;
+    document.getElementById("tPkt").innerHTML = tPkt;
+    document.getElementById("hPkt").innerHTML = hPkt;
+    document.getElementById("aufs").innerHTML = aufs;
+    document.getElementById("abs").innerHTML = abs;
+    
     myMap.fitBounds(evt.target.getBounds());
 
 });

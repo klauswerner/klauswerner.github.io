@@ -142,3 +142,6 @@ layerAuswahl.onchange = function(evt){
     //console.log(i, wienDatensaetze[i]);
     ladeGeojsonLayer(wienDatensaetze[i]);
 };
+
+//Plugin Fullscreen
+karte.addControl(new L.Control.Fullscreen());
