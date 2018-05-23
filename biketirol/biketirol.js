@@ -27,7 +27,7 @@
 
 // Overlay controls zum unabhängigem Ein-/Ausschalten der Route und Marker hinzufügen
 
-//<reference path = "typings/index.d.ts">
+// / <reference path = "typings/index.d.ts" />
 
 let myMap = L.map("map");
 
