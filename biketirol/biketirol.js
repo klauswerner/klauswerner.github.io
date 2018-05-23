@@ -34,6 +34,7 @@ let myMap = L.map("map");
 // für fitBounds
 const biketourTrack = L.featureGroup().addTo(myMap);
 const biketourMarker = L.featureGroup().addTo(myMap);
+const biketourElevation = L.featureGroup().addTo(myMap);
 
 //Hintergrundkarten
 let myLayers = {
@@ -101,14 +102,23 @@ let myMapControl = L.control.layers({
     "Elektronische Karte Tirol Winter": tirisWinterkarte,
     "Elektronische Karte Tirol Orthofoto": tirisOrthofoto,
 }, {
-        "biketourTrack Etappe 14": biketourTrack,
+        //"biketourTrack Etappe 14": biketourTrack,
         "Start - Ziel": biketourMarker,
+        "Steigungslinie": biketourElevation,
     }, {
         collapsed: true
     }).addTo(myMap);
 
 //Kartenansichten Kontrollpanel aktivieren
 //myMap.addControl(myMapControl);
+
+//Plugin Eleveation 
+//all used options are the default values
+let el = L.control.elevation({	
+    position: "topright",
+    theme: "steelblue-theme", //default: lime-theme
+    collapsed: true,
+}).addTo(myMap);
 
 //Maßstaß erstellen und hinzufügen
 let myMapScale = L.control.scale(
@@ -169,7 +179,7 @@ geojson.bindPopup(function(layer){
 myMap.addControl(new L.Control.Fullscreen());
 
 //Plugin GPX
-let gpxTrack = new L.GPX("data/etappe14.gpx", {async: true}).addTo(myMap);
+let gpxTrack = new L.GPX("data/etappe14.gpx", {async: true});//.addTo(biketourTrack);
 gpxTrack.on("loaded",function(evt){
 
     /*console.log(evt.target.get_distance().toFixed(0));
@@ -193,10 +203,59 @@ gpxTrack.on("loaded",function(evt){
 
 });
 
-//Plugin Eleveation 
-//all used options are the default values
-let el = L.control.elevation().addTo(myMap);
-
 gpxTrack.on("addline",function(evt){
     el.addData(evt.line);
+    //console.log(evt.line);
+    //console.log(evt.line.getLatLngs());
+    //console.log(evt.line.getLatLngs()[0]);
+    //console.log(evt.line.getLatLngs()[0].lat);
+    //console.log(evt.line.getLatLngs()[0].lng);
+    //console.log(evt.line.getLatLngs()[0].meta);
+    //console.log(evt.line.getLatLngs()[0].meta.ele);
+
+    //alle Segmente der Steigungslinie hinzufügen
+    const gpxlinie = evt.line.getLatLngs();
+    for(i = 1; i < gpxlinie.length; i++ ){
+        let p1 = gpxlinie[i-1];
+        let p2 = gpxlinie[i];
+    //Anstand zwischen Puntke berechnen
+        let dist = myMap.distance(
+            [p1.lat,p1.lng],
+            [p2.lat,p2.lng]
+        );
+    //Höhenunterschied berechnen
+        let delta = p2.meta.ele - p1.meta.ele
+    
+    //Steigung in Prozent berechnen
+    //Neumoderne IF: Bedingung ? Ausdruck1 : Ausdruck2
+        let prot = (dist > 0) ? (delta/dist*100.0).toFixed(0) : 0;
+
+       /* alt
+        let prot = 0;
+        if(dist>0){
+        let prot = (delta/dist*100.0).toFixed(1);
+        }*/
+
+        //console.log(p1.lat, p1.lng, p1.meta.ele, p2.lat, p2.lng, p2.meta.ele, dist, delta, prot);
+
+        let farbe = 
+            prot > 10   ? "#a50f15" : 
+            prot > 6    ? "#de2d26" : 
+            prot > 2    ? "#fb6a4a" : 
+            prot > 0    ? "#fcae91" : 
+            prot > -2   ? "#bae4b3" : 
+            prot > -6   ? "#74c476" : 
+            prot > -10  ? "#31a354" : 
+                          "#006d2c";
+
+        let segment = L.polyline(
+            [
+                [p1.lat,p1.lng], 
+                [p2.lat,p2.lng],
+            ],{
+            color: farbe,
+        }).addTo(biketourElevation);
+    }
+
 });
+
