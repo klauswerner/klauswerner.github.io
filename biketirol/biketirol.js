@@ -193,3 +193,10 @@ gpxTrack.on("loaded",function(evt){
 
 });
 
+//Plugin Eleveation 
+//all used options are the default values
+let el = L.control.elevation().addTo(myMap);
+
+gpxTrack.on("addline",function(evt){
+    el.addData(evt.line);
+});
