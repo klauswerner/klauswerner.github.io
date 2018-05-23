@@ -254,6 +254,7 @@ gpxTrack.on("addline",function(evt){
                 [p2.lat,p2.lng],
             ],{
             color: farbe,
+            weight: 8.0,
         }).addTo(biketourElevation);
     }
 
